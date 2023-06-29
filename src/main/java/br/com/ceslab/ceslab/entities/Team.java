@@ -13,6 +13,7 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private boolean completed;
 
     @ManyToOne
     private Course course;
