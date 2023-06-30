@@ -1,27 +1,31 @@
 package br.com.ceslab.ceslab.dto;
 
-import br.com.ceslab.ceslab.entities.Course;
+import br.com.ceslab.ceslab.entities.Team;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-import java.io.Serializable;
-
-public class CourseDTO implements Serializable {
+public class TeamDTO {
 
     private Long id;
 
     @NotBlank
     private String name;
 
-    public CourseDTO() {}
+    @NotNull
+    private boolean completed;
 
-    public CourseDTO(Long id, String name) {
+    public TeamDTO(){}
+
+    public TeamDTO(Long id, String name, boolean completed) {
         this.id = id;
         this.name = name;
+        this.completed = completed;
     }
 
-    public CourseDTO(Course entity) {
+    public TeamDTO(Team entity) {
         this.id = entity.getId();
         this.name = entity.getName();
+        this.completed = entity.isCompleted();
     }
 
     public Long getId() {
@@ -38,5 +42,13 @@ public class CourseDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }
