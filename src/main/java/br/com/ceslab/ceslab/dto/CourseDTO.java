@@ -1,12 +1,16 @@
 package br.com.ceslab.ceslab.dto;
 
 import br.com.ceslab.ceslab.entities.Course;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 
 public class CourseDTO implements Serializable {
 
     private Long id;
+
+    @NotBlank
     private String name;
 
     public CourseDTO(){}
