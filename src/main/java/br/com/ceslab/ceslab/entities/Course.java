@@ -19,6 +19,10 @@ public class Course {
         this.name = name;
     }
 
+    public Course(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

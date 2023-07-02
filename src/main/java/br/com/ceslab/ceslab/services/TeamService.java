@@ -1,6 +1,7 @@
 package br.com.ceslab.ceslab.services;
 
 import br.com.ceslab.ceslab.dto.TeamDTO;
+import br.com.ceslab.ceslab.entities.Course;
 import br.com.ceslab.ceslab.entities.Team;
 import br.com.ceslab.ceslab.repositories.TeamRepository;
 import br.com.ceslab.ceslab.services.exceptions.ResourceNotFound;
@@ -26,6 +27,16 @@ public class TeamService {
     @Transactional(readOnly = true)
     public TeamDTO findById(Long id){
         Team entity = repository.findById(id).orElseThrow(() -> new ResourceNotFound("Class not found"));
+        return new TeamDTO(entity);
+    }
+
+    @Transactional
+    public TeamDTO create(Long idCourse, TeamDTO dto){
+        Team team = new Team();
+        team.setName(dto.getName());
+        team.setCompleted(false);
+        team.setCourse(new Course(idCourse));
+        Team entity = repository.save(team);
         return new TeamDTO(entity);
     }
 

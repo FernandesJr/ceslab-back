@@ -1,5 +1,6 @@
 package br.com.ceslab.ceslab.entities;
 
+import br.com.ceslab.ceslab.dto.TeamDTO;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -26,6 +27,11 @@ public class Team {
     public Team(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Team(TeamDTO dto) {
+        this.name = dto.getName();
+        this.course = new Course(dto.getCourseDTO().getId());
     }
 
     public Long getId() {

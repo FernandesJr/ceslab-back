@@ -14,6 +14,8 @@ public class TeamDTO {
     @NotNull
     private boolean completed;
 
+    private CourseDTO courseDTO;
+
     public TeamDTO(){}
 
     public TeamDTO(Long id, String name, boolean completed) {
@@ -26,6 +28,7 @@ public class TeamDTO {
         this.id = entity.getId();
         this.name = entity.getName();
         this.completed = entity.isCompleted();
+        this.courseDTO = new CourseDTO(entity.getCourse());
     }
 
     public Long getId() {
@@ -50,5 +53,13 @@ public class TeamDTO {
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    public CourseDTO getCourseDTO() {
+        return courseDTO;
+    }
+
+    public void setCourseDTO(CourseDTO courseDTO) {
+        this.courseDTO = courseDTO;
     }
 }
