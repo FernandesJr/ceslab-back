@@ -4,4 +4,5 @@ import br.com.ceslab.ceslab.entities.Degree;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DegreeRepository extends JpaRepository<Degree, Long> {
+    Degree findByCode(String code);
 }

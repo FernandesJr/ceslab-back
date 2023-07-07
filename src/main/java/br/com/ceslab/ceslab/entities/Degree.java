@@ -1,8 +1,10 @@
 package br.com.ceslab.ceslab.entities;
 
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tb_degree")
@@ -14,7 +16,7 @@ public class Degree {
 
     private String code;
 
-    private LocalDate generationDate;
+    private LocalDateTime generationDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Team team;
@@ -61,5 +63,13 @@ public class Degree {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public LocalDateTime getGenerationDate() {
+        return generationDate;
+    }
+
+    public void setGenerationDate(LocalDateTime generationDate) {
+        this.generationDate = generationDate;
     }
 }
