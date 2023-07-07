@@ -4,7 +4,9 @@ import br.com.ceslab.ceslab.entities.Team;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public class TeamDTO {
+import java.io.Serializable;
+
+public class TeamDTO implements Serializable {
 
     private Long id;
 

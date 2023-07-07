@@ -1,5 +1,6 @@
 package br.com.ceslab.ceslab.services;
 
+import br.com.ceslab.ceslab.dto.StudentDTO;
 import br.com.ceslab.ceslab.dto.TeamDTO;
 import br.com.ceslab.ceslab.entities.Course;
 import br.com.ceslab.ceslab.entities.Team;
@@ -11,11 +12,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Set;
+
 @Service
 public class TeamService {
 
     @Autowired
     private TeamRepository repository;
+
+    @Autowired
+    private StudentService studentService;
 
 
     @Transactional(readOnly = true)
@@ -31,11 +38,11 @@ public class TeamService {
     }
 
     @Transactional
-    public TeamDTO create(Long idCourse, TeamDTO dto){
+    public TeamDTO create(TeamDTO dto){
         Team team = new Team();
         team.setName(dto.getName());
         team.setCompleted(false);
-        team.setCourse(new Course(idCourse));
+        team.setCourse(new Course(dto.getCourseDTO().getId()));
         Team entity = repository.save(team);
         return new TeamDTO(entity);
     }
@@ -46,5 +53,9 @@ public class TeamService {
         entity.setName(dto.getName());
         entity.setCompleted(dto.isCompleted());
         return new TeamDTO(entity);
+    }
+
+    public List<StudentDTO> findStudentsByTeam(Long id){
+        return this.studentService.findByTeam(new Team(id));
     }
 }

@@ -1,45 +1,51 @@
-package br.com.ceslab.ceslab.entities;
+package br.com.ceslab.ceslab.dto;
 
-import jakarta.persistence.*;
+import br.com.ceslab.ceslab.entities.MonthPayment;
+import br.com.ceslab.ceslab.entities.Registration;
+import br.com.ceslab.ceslab.entities.Student;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "tb_student")
-public class Student {
+public class StudentDTO implements Serializable{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String phone;
     private LocalDate dateBirth;
     private String cpf;
 
-    @ManyToMany
-    @JoinTable(
-            name = "tb_team_student",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "team_id"))
-    private List<Team> teams = new ArrayList<>();
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
     private List<MonthPayment> monthPayments = new ArrayList<>();
+    private List<Registration> registrations = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
-    private List<Registration> registrations;
+    public StudentDTO(){}
 
-    public Student() {}
-
-    public Student(Long id, String name, String phone, LocalDate dateBirth, String cpf) {
+    public StudentDTO(Long id, String name, String phone, LocalDate dateBirth, String cpf) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.dateBirth = dateBirth;
         this.cpf = cpf;
+    }
+
+    public StudentDTO(Student entity) {
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.phone = entity.getPhone();
+        this.dateBirth = entity.getDateBirth();
+        this.cpf = entity.getCpf();
+        this.addMonthPayment(entity.getMonthPayments());
+        this.addRegistration(entity.getRegistrations());
+    }
+
+    private void addMonthPayment(List<MonthPayment> monthPayments) {
+        monthPayments.forEach(monthPayment -> this.monthPayments.add(monthPayment));
+    }
+
+    private void addRegistration(List<Registration> registrations) {
+        registrations.forEach(registration -> this.registrations.add(registration));
     }
 
     public Long getId() {
@@ -80,10 +86,6 @@ public class Student {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public List<Team> getTeams() {
-        return teams;
     }
 
     public List<MonthPayment> getMonthPayments() {

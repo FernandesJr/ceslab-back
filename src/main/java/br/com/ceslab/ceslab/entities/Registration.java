@@ -1,5 +1,6 @@
 package br.com.ceslab.ceslab.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -21,6 +22,8 @@ public class Registration {
     @ManyToOne
     private Team team;
 
+    //prevent recursive
+    @JsonIgnore
     @ManyToOne
     private Student student;
 

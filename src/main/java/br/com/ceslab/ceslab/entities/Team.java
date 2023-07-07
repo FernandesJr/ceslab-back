@@ -29,6 +29,10 @@ public class Team {
         this.name = name;
     }
 
+    public Team(Long id) {
+        this.id = id;
+    }
+
     public Team(TeamDTO dto) {
         this.name = dto.getName();
         this.course = new Course(dto.getCourseDTO().getId());
