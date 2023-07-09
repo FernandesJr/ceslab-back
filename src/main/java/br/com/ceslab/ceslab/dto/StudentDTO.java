@@ -41,10 +41,12 @@ public class StudentDTO implements Serializable{
     }
 
     private void addMonthPayment(List<MonthPayment> monthPayments) {
-        monthPayments.forEach(monthPayment -> this.monthPayments.add(monthPayment));
+        if (monthPayments != null)
+            monthPayments.forEach(monthPayment -> this.monthPayments.add(monthPayment));
     }
 
     private void addRegistration(List<Registration> registrations) {
+        if (registrations != null)
         registrations.forEach(registration -> this.registrations.add(registration));
     }
 
@@ -94,5 +96,13 @@ public class StudentDTO implements Serializable{
 
     public List<Registration> getRegistrations() {
         return registrations;
+    }
+
+    public void setMonthPayments(List<MonthPayment> monthPayments) {
+        this.monthPayments = monthPayments;
+    }
+
+    public void setRegistrations(List<Registration> registrations) {
+        this.registrations = registrations;
     }
 }

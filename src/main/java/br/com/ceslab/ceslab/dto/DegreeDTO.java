@@ -70,4 +70,6 @@ public class DegreeDTO implements Serializable {
     public void setTeamDTO(TeamDTO teamDTO) {
         this.teamDTO = teamDTO;
     }
+
+
 }

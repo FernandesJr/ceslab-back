@@ -34,6 +34,10 @@ public class Student {
 
     public Student() {}
 
+    public Student(Long id) {
+        this.id = id;
+    }
+
     public Student(Long id, String name, String phone, LocalDate dateBirth, String cpf) {
         this.id = id;
         this.name = name;

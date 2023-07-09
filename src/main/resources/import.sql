@@ -28,4 +28,4 @@ INSERT INTO tb_month_payment (price, discount, paid, payday, student_id, team_id
 INSERT INTO tb_month_payment (price, discount, paid, payday, student_id, team_id) VALUES (170, 20, false, '2023-08-01', 4, 2);
 
 
-INSERT INTO tb_degree (code, generation_date, student_id, team_id) VALUES ('CTF0123-A94BG1-230707-151845', '2023-07-07 15:24:45', 1, 1);
+INSERT INTO tb_degree (code, generation_date, student_id, team_id) VALUES ('ctf0323-01f3d06f-54d9-4472-bd49-44a3c25ac663-20230709-181050', '2023-07-07 15:24:45', 1, 1);
