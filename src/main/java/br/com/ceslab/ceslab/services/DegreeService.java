@@ -51,7 +51,7 @@ public class DegreeService {
         UUID uuid = UUID.randomUUID();
         String code = uuid.toString();
 
-        Team team = teamRepository.getReferenceById(dto.getStudentDTO().getId());
+        Team team = teamRepository.getReferenceById(dto.getTeamDTO().getId());
 
         LocalDateTime dateNow = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
