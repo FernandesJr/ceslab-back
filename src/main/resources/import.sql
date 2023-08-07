@@ -1,3 +1,9 @@
+INSERT INTO tb_user (email, password) VALUES ('fernandes@email.com', '$2a$10$XUf0WzsgyRVc0Yx.b3uzAuhIrk2kefwG5b5kzwj14oKk9ggeYQY1u')
+
+INSERT INTO tb_role (authority) VALUES ('ADMIN');
+
+INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
+
 INSERT INTO tb_course (name) VALUES ('flebotomia');
 
 INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0323', false, 1);

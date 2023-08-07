@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "https://ceslab.com.br")
+//@CrossOrigin(origins = "https://ceslab.com.br")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/degree")
 public class DegreeResource {
