@@ -14,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.Arrays;
@@ -24,6 +25,9 @@ public class SecurityConfiguration {
 
     @Autowired
     private Environment environment;
+
+    @Autowired
+    private SecurityFilter securityFilter;
 
     private static final String[] ROTE_PUBLIC = {"*/auth"};
 
@@ -40,9 +44,12 @@ public class SecurityConfiguration {
         http.csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authorization -> authorization
-                    //.requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
                     .requestMatchers(ROTE_PUBLIC).permitAll()
-                    .anyRequest().authenticated());
+                    .requestMatchers(HttpMethod.GET, "*/degree/*").permitAll()
+                    .anyRequest().authenticated()
+            )
+                //Verify token
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
