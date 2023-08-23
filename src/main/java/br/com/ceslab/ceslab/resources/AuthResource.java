@@ -2,6 +2,7 @@ package br.com.ceslab.ceslab.resources;
 
 import br.com.ceslab.ceslab.dto.TokenDTO;
 import br.com.ceslab.ceslab.dto.user.UserAuthDTO;
+import br.com.ceslab.ceslab.entities.User;
 import br.com.ceslab.ceslab.services.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class AuthResource {
         //The Spring valid the user and pass. Case not found throw a 403
         var user = new UsernamePasswordAuthenticationToken(dto.email(), dto.password());
         var auth = this.authenticationManager.authenticate(user);
-        TokenDTO token = new TokenDTO(tokenService.createToken(dto));
+        TokenDTO token = new TokenDTO(tokenService.createToken((User) auth.getPrincipal()));
         return ResponseEntity.ok(token);
     }
 }

@@ -41,17 +41,19 @@ public class SecurityConfiguration {
             http.headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
         }
 
-        http.csrf(csrf -> csrf.disable())
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(authorization -> authorization
-                    .requestMatchers(ROTE_PUBLIC).permitAll()
-                    .requestMatchers(HttpMethod.GET, "*/degree/*").permitAll()
-                    .anyRequest().authenticated()
-            )
-                //Verify token
-                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
-
-        return http.build();
+        return http
+                .csrf(csrf -> csrf.disable())
+                .formLogin(form -> form.disable())
+                .httpBasic(basic -> basic.disable())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(authorization -> authorization
+                        .requestMatchers(ROTE_PUBLIC).permitAll()
+                        .requestMatchers(HttpMethod.GET, "*/degree/*").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .addFilterBefore(this.securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .cors(cors -> cors.configure(http))
+                .build();
     }
 
     @Bean

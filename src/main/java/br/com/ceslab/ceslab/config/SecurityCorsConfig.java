@@ -20,8 +20,10 @@ public class SecurityCorsConfig {
         String[] ORIGIN_CORS = new String[2];
         ORIGIN_CORS[0] = "https://ceslab.com.br";
 
-        if (Arrays.asList(environment.getActiveProfiles()).contains("test"))
+        if (Arrays.asList(environment.getActiveProfiles()).contains("test")) {
             ORIGIN_CORS[1] = "http://localhost:4200";
+            System.out.println("Modo test reconhecido autorizando: " + ORIGIN_CORS[1]);
+        }
 
         return new WebMvcConfigurer() {
             @Override

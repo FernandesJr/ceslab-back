@@ -1,4 +1,4 @@
-INSERT INTO tb_user (email, password) VALUES ('fernandes@email.com', '$2a$10$XUf0WzsgyRVc0Yx.b3uzAuhIrk2kefwG5b5kzwj14oKk9ggeYQY1u')
+INSERT INTO tb_user (email, password) VALUES ('fer@email.com', '$2a$10$XUf0WzsgyRVc0Yx.b3uzAuhIrk2kefwG5b5kzwj14oKk9ggeYQY1u')
 
 INSERT INTO tb_role (authority) VALUES ('ADMIN');
 

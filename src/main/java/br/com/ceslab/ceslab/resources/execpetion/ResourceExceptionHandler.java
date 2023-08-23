@@ -1,8 +1,11 @@
 package br.com.ceslab.ceslab.resources.execpetion;
 
 import br.com.ceslab.ceslab.services.exceptions.ResourceNotFound;
+import br.com.ceslab.ceslab.services.exceptions.TokenInvalidException;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,7 +64,7 @@ public class ResourceExceptionHandler {
     }
 
     @ExceptionHandler(JWTCreationException.class)
-    public ResponseEntity<StandardError> userNotFound(JWTCreationException e,  HttpServletRequest request){
+    public ResponseEntity<StandardError> JwtTokenCreate(JWTCreationException e,  HttpServletRequest request){
         HttpStatus status = HttpStatus.BAD_REQUEST;
         StandardError error = new StandardError();
         error.setTimestamp(Instant.now());
@@ -72,13 +75,37 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(status).body(error);
     }
 
-    @ExceptionHandler(JWTDecodeException.class)
-    public ResponseEntity<StandardError> userNotFound(JWTDecodeException e, HttpServletRequest request){
-        HttpStatus status = HttpStatus.BAD_REQUEST;
+    @ExceptionHandler(TokenExpiredException.class)
+    public ResponseEntity<StandardError> TokenExpired(TokenExpiredException e, HttpServletRequest request){
+        HttpStatus status = HttpStatus.FORBIDDEN;
         StandardError error = new StandardError();
         error.setTimestamp(Instant.now());
         error.setStatus(status.value());
-        error.setError("Erro while validate token");
+        error.setError("The Token has expired");
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
+        return ResponseEntity.status(status).body(error);
+    }
+
+    @ExceptionHandler(JWTDecodeException.class)
+    public ResponseEntity<StandardError> TokenExpiredVerify(JWTDecodeException e, HttpServletRequest request){
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        StandardError error = new StandardError();
+        error.setTimestamp(Instant.now());
+        error.setStatus(status.value());
+        error.setError("The Token has expired");
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
+        return ResponseEntity.status(status).body(error);
+    }
+
+    @ExceptionHandler(TokenInvalidException.class)
+    public ResponseEntity<StandardError> tokenInvalidException(TokenInvalidException e, HttpServletRequest request){
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        StandardError error = new StandardError();
+        error.setTimestamp(Instant.now());
+        error.setStatus(status.value());
+        error.setError("Token invalid");
         error.setMessage(e.getMessage());
         error.setPath(request.getRequestURI());
         return ResponseEntity.status(status).body(error);

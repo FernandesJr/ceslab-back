@@ -1,10 +1,11 @@
 package br.com.ceslab.ceslab.services;
 
-import br.com.ceslab.ceslab.dto.user.UserAuthDTO;
+import br.com.ceslab.ceslab.entities.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,24 +23,39 @@ public class TokenService {
     @Autowired
     private UserService userService;
 
-    public String createToken(UserAuthDTO user) throws JWTCreationException {
+    public String createToken(User user) throws JWTCreationException {
 
-        Algorithm algorithm = Algorithm.HMAC256(secretKey);
+        Algorithm algorithm = Algorithm.HMAC256(this.secretKey);
         return JWT.create()
                 .withIssuer("ceslab-api")
-                .withSubject(user.email())
+                .withSubject(user.getUsername())
+                .withIssuedAt(generationDate())
                 .withExpiresAt(generationDateExpiration())
                 .sign(algorithm);
     }
 
-    public String validateToken(String token) throws JWTDecodeException {
+    public String validateToken(String token) {
 
-        Algorithm algorithm = Algorithm.HMAC256(secretKey);
-        return JWT.require(algorithm)
-                .withIssuer("ceslab-api")
-                .build()
-                .verify(token)
-                .getSubject();
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(this.secretKey);
+            return JWT.require(algorithm)
+                    .withIssuer("ceslab-api")
+                    .build()
+                    .verify(token)
+                    .getSubject();
+        } catch (JWTDecodeException e) {
+            System.out.println(e.getMessage() + token);
+            //throw new TokenInvalidException(e.getMessage());
+        } catch (TokenExpiredException ex) {
+            System.out.println(ex.getMessage() + token);
+            //throw new TokenInvalidException(ex.getMessage());
+        }
+        return null;
+    }
+
+    //Creation token
+    private Instant generationDate() {
+        return Instant.now().atOffset(ZoneOffset.of("-03:00")).toInstant();
     }
 
     //Duration token

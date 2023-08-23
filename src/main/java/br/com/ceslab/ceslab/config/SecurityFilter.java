@@ -1,6 +1,5 @@
 package br.com.ceslab.ceslab.config;
 
-import br.com.ceslab.ceslab.entities.User;
 import br.com.ceslab.ceslab.services.TokenService;
 import br.com.ceslab.ceslab.services.UserService;
 import jakarta.servlet.FilterChain;
@@ -10,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -29,9 +29,11 @@ public class SecurityFilter extends OncePerRequestFilter {
         String token = recoverToken(request);
         if (token != null) {
             String userEmail = this.tokenService.validateToken(token);
-            User user = this.userService.findByEmail(userEmail);
-            var authentication = new UsernamePasswordAuthenticationToken(user.getUsername(), null, user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            if (userEmail != null) {
+                UserDetails user = this.userService.loadUserByUsername(userEmail);
+                var authentication = new UsernamePasswordAuthenticationToken(user.getUsername(), null, user.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
         }
         //Next filter
         filterChain.doFilter(request, response);
