@@ -22,7 +22,7 @@ public class TeamResource {
 
     @GetMapping
     public ResponseEntity<Page<TeamDTO>> findAll(
-            @RequestParam(name = "page", required = false, defaultValue = "1") int pageNumber){
+            @RequestParam(name = "page", required = false, defaultValue = "0") int pageNumber){
         Page<TeamDTO> page = service.findAll(pageNumber);
         return ResponseEntity.ok(page);
     }

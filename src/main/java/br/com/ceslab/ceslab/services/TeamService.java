@@ -30,7 +30,7 @@ public class TeamService {
     @Transactional(readOnly = true)
     public Page<TeamDTO> findAll(int pageNumber){
         //first page is 0
-        Pageable pageable = PageRequest.of(pageNumber - 1, 6, Sort.Direction.DESC, "id");
+        Pageable pageable = PageRequest.of(pageNumber, 6, Sort.Direction.DESC, "id");
         Page<Team> page = repository.findAll(pageable);
         return page.map(p -> new TeamDTO(p));
     }
