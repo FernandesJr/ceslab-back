@@ -6,8 +6,10 @@ INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
 
 INSERT INTO tb_course (name) VALUES ('flebotomia');
 
-INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0323', false, 1);
-INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0423', false, 1);
+INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0323', true, 1);
+INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0423', true, 1);
+INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0523', false, 1);
+INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0623', false, 1);
 
 INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Odair Guimarães Pereira', '81992208527', '1900-01-01', '102.940.284-12');
 INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Maria Fabielle Soares Da Silva', '81991100809', '1900-02-01', '125.962.574-59');

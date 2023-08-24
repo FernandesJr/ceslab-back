@@ -8,7 +8,9 @@ import br.com.ceslab.ceslab.repositories.TeamRepository;
 import br.com.ceslab.ceslab.services.exceptions.ResourceNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +28,9 @@ public class TeamService {
 
 
     @Transactional(readOnly = true)
-    public Page<TeamDTO> findAll(Pageable pageable){
+    public Page<TeamDTO> findAll(int pageNumber){
+        //first page is 0
+        Pageable pageable = PageRequest.of(pageNumber - 1, 6, Sort.Direction.DESC, "id");
         Page<Team> page = repository.findAll(pageable);
         return page.map(p -> new TeamDTO(p));
     }

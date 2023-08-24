@@ -6,7 +6,6 @@ import br.com.ceslab.ceslab.services.TeamService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -15,15 +14,16 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/team")
+@RequestMapping("/api/teams")
 public class TeamResource {
 
     @Autowired
     private TeamService service;
 
     @GetMapping
-    public ResponseEntity<Page<TeamDTO>> findAll(Pageable pageable){
-        Page<TeamDTO> page = service.findAll(pageable);
+    public ResponseEntity<Page<TeamDTO>> findAll(
+            @RequestParam(name = "page", required = false, defaultValue = "1") int pageNumber){
+        Page<TeamDTO> page = service.findAll(pageNumber);
         return ResponseEntity.ok(page);
     }
 
