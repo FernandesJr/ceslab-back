@@ -15,6 +15,7 @@ public class MonthPayment {
 
     private Double price;
     private Double discount;
+    private Double received;
     private boolean paid;
     private LocalDate payday;
 
@@ -74,5 +75,13 @@ public class MonthPayment {
 
     public void setPayday(LocalDate payday) {
         this.payday = payday;
+    }
+
+    public Double getReceived() {
+        return received;
+    }
+
+    public void setReceived(Double received) {
+        this.received = received;
     }
 }
