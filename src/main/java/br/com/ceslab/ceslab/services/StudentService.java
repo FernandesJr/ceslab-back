@@ -29,4 +29,14 @@ public class StudentService {
         Student entity = this.repository.findById(id).orElseThrow(() -> new ResourceNotFound("User not found"));
         return new StudentDTO(entity);
     }
+
+    @Transactional
+    public StudentDTO update(StudentDTO dto) {
+        Student entity = this.repository.getReferenceById(dto.getId());
+        entity.setName(dto.getName());
+        entity.setCpf(dto.getCpf());
+        entity.setPhone(dto.getPhone());
+        entity.setDateBirth(dto.getDateBirth());
+        return new StudentDTO(entity);
+    }
 }

@@ -44,7 +44,8 @@ INSERT INTO tb_month_payment (price, discount, received, paid, payday, student_i
 INSERT INTO tb_month_payment (price, discount, received, paid, payday, student_id, team_id) VALUES (170, 20, 150, false, '2023-08-01', 2, 13);
 INSERT INTO tb_month_payment (price, discount, received, paid, payday, student_id, team_id) VALUES (170, 0, 0, false, '2023-08-01', 3, 14);
 INSERT INTO tb_month_payment (price, discount, received, paid, payday, student_id, team_id) VALUES (170, 20, 170, false, '2023-08-01', 4, 14);
-INSERT INTO tb_month_payment (price, discount, received, paid, payday, student_id, team_id) VALUES (170, 20, 130, false, '2023-08-01', 4, 14);
+INSERT INTO tb_month_payment (price, discount, received, paid, payday, student_id, team_id) VALUES (170, 20, 130, false, '2023-09-01', 4, 14);
+INSERT INTO tb_month_payment (price, discount, received, paid, payday, student_id, team_id) VALUES (170, 0, 0, false, '2023-10-01', 4, 14);
 
 
 INSERT INTO tb_degree (code, generation_date, student_id, team_id) VALUES ('ctf0323-01f3d06f-54d9-4472-bd49-44a3c25ac663-20230709-181050', '2023-07-07 15:24:45', 1, 13);
