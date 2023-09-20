@@ -19,9 +19,10 @@ public class StudentResource {
         return ResponseEntity.ok(dto);
     }
 
-    @PutMapping
-    public ResponseEntity<StudentDTO> update(@RequestBody StudentDTO dto) {
-        StudentDTO studentDTO = this.service.update(dto);
+    @PutMapping("{id}")
+    public ResponseEntity<StudentDTO> update(
+            @RequestBody StudentDTO dto, @PathVariable Long id) {
+        StudentDTO studentDTO = this.service.update(dto, id);
         return ResponseEntity.ok(studentDTO);
     }
 }

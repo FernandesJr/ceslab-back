@@ -31,16 +31,16 @@ public class StudentService {
     }
 
     @Transactional
-    public StudentDTO update(StudentDTO dto) {
+    public StudentDTO update(StudentDTO dto, Long id) {
         try {
-            Student entity = this.repository.getReferenceById(dto.getId());
+            Student entity = this.repository.getReferenceById(id);
             entity.setName(dto.getName());
             entity.setCpf(dto.getCpf());
             entity.setPhone(dto.getPhone());
             entity.setDateBirth(dto.getDateBirth());
             return new StudentDTO(entity);
         } catch (Exception e ) {
-            throw new ResourceNotFound("Student not found with id " + dto.getId());
+            throw new ResourceNotFound("Student not found with id " + id);
         }
     }
 }

@@ -15,16 +15,16 @@ public class RegistrationService {
     private RegistrationRepository repository;
 
     @Transactional
-    public RegistrationUpdate update(RegistrationUpdate dto) {
+    public RegistrationUpdate update(RegistrationUpdate dto, Long id) {
         try {
-            Registration entity = repository.getReferenceById(dto.getId());
+            Registration entity = repository.getReferenceById(id);
             entity.setReceived(dto.getReceived());
             entity.setDiscount(dto.getDiscount());
             entity.setPaid(calculateIfPaid(dto));
             entity.setPayday(dto.getPayday());
             return new RegistrationUpdate(entity);
         } catch (Exception e) {
-            throw new ResourceNotFound("Registration not found with id: " + dto.getId());
+            throw new ResourceNotFound("Registration not found with id: " + id);
         }
     }
 

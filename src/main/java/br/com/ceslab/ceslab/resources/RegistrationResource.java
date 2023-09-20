@@ -5,10 +5,7 @@ import br.com.ceslab.ceslab.entities.Registration;
 import br.com.ceslab.ceslab.services.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/registrations")
@@ -17,9 +14,10 @@ public class RegistrationResource {
     @Autowired
     private RegistrationService service;
 
-    @PutMapping
-    public ResponseEntity<RegistrationUpdate> update(@RequestBody RegistrationUpdate dto) {
-        RegistrationUpdate registration = this.service.update(dto);
+    @PutMapping("/{id}")
+    public ResponseEntity<RegistrationUpdate> update(
+            @RequestBody RegistrationUpdate dto, @PathVariable Long id) {
+        RegistrationUpdate registration = this.service.update(dto, id);
         return ResponseEntity.ok(registration);
     }
 
