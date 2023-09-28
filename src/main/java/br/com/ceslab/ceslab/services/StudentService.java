@@ -4,8 +4,11 @@ import br.com.ceslab.ceslab.dto.StudentDTO;
 import br.com.ceslab.ceslab.entities.Student;
 import br.com.ceslab.ceslab.entities.Team;
 import br.com.ceslab.ceslab.repositories.StudentRepository;
+import br.com.ceslab.ceslab.services.exceptions.DataBaseViolationException;
 import br.com.ceslab.ceslab.services.exceptions.ResourceNotFound;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +35,11 @@ public class StudentService {
 
     @Transactional
     public StudentDTO update(StudentDTO dto, Long id) {
+
+        Student entityByCpf = this.repository.findByCpf(dto.getCpf());
+        if (entityByCpf != null && !entityByCpf.getId().equals(id))
+            throw new DataBaseViolationException("CPF already in use");
+
         try {
             Student entity = this.repository.getReferenceById(id);
             entity.setName(dto.getName());
@@ -39,8 +47,8 @@ public class StudentService {
             entity.setPhone(dto.getPhone());
             entity.setDateBirth(dto.getDateBirth());
             return new StudentDTO(entity);
-        } catch (Exception e ) {
-            throw new ResourceNotFound("Student not found with id " + id);
+        } catch (Exception e) {
+           throw new ResourceNotFound("Student not found with id: " + id);
         }
     }
 }

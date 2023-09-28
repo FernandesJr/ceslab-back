@@ -1,7 +1,6 @@
 package br.com.ceslab.ceslab.resources;
 
 import br.com.ceslab.ceslab.dto.registration.RegistrationUpdate;
-import br.com.ceslab.ceslab.entities.Registration;
 import br.com.ceslab.ceslab.services.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

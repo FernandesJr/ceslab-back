@@ -15,8 +15,12 @@ public class Student {
     private Long id;
 
     private String name;
+
     private String phone;
+
     private LocalDate dateBirth;
+
+    @Column(unique = true)
     private String cpf;
 
     @ManyToMany

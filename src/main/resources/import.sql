@@ -21,11 +21,11 @@ INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0624', true, 1);
 INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0724', false, 1);
 INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0824', false, 1);
 
-INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Odair Guimarães Pereira', '81992208527', '1900-01-01', '102.940.284-12');
-INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Maria Fabielle Soares Da Silva', '81991100809', '1900-02-01', '125.962.574-59');
+INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Odair Guimarães Pereira', '81992208527', '1990-01-01', '102.940.284-12');
+INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Maria Fabielle Soares Da Silva', '81991100809', '1990-02-01', '125.962.574-59');
 
-INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Maria Fernanda da Silva Oliveira', '81998440931', '1900-03-01', '115.897.914-28');
-INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Luzia de Melo Valenca', '81998452127', '1900-05-01', '093.041.524-88');
+INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Maria Fernanda da Silva Oliveira', '81998440931', '1990-03-01', '115.897.914-28');
+INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Luzia de Melo Valenca', '81998452127', '1990-05-01', '093.041.524-88');
 
 
 INSERT INTO tb_team_student (student_id, team_id) VALUES (1, 13);

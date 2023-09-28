@@ -2,6 +2,7 @@ package br.com.ceslab.ceslab.resources;
 
 import br.com.ceslab.ceslab.dto.StudentDTO;
 import br.com.ceslab.ceslab.services.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +20,9 @@ public class StudentResource {
         return ResponseEntity.ok(dto);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<StudentDTO> update(
-            @RequestBody StudentDTO dto, @PathVariable Long id) {
+            @Valid @RequestBody StudentDTO dto, @PathVariable Long id) {
         StudentDTO studentDTO = this.service.update(dto, id);
         return ResponseEntity.ok(studentDTO);
     }

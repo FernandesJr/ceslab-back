@@ -3,6 +3,7 @@ package br.com.ceslab.ceslab.dto;
 import br.com.ceslab.ceslab.entities.MonthPayment;
 import br.com.ceslab.ceslab.entities.Registration;
 import br.com.ceslab.ceslab.entities.Student;
+import jakarta.validation.constraints.NotBlank;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,9 +13,15 @@ import java.util.List;
 public class StudentDTO implements Serializable{
 
     private Long id;
+
+    @NotBlank
     private String name;
+
     private String phone;
+
     private LocalDate dateBirth;
+
+    @NotBlank
     private String cpf;
 
     private List<MonthPayment> monthPayments = new ArrayList<>();

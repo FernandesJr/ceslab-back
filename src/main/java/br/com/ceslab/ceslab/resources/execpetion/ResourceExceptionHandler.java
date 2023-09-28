@@ -1,5 +1,6 @@
 package br.com.ceslab.ceslab.resources.execpetion;
 
+import br.com.ceslab.ceslab.services.exceptions.DataBaseViolationException;
 import br.com.ceslab.ceslab.services.exceptions.ResourceNotFound;
 import br.com.ceslab.ceslab.services.exceptions.TokenInvalidException;
 import com.auth0.jwt.exceptions.JWTCreationException;
@@ -58,6 +59,19 @@ public class ResourceExceptionHandler {
         error.setTimestamp(Instant.now());
         error.setStatus(status.value());
         error.setError("User not found");
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
+        return ResponseEntity.status(status).body(error);
+    }
+
+
+    @ExceptionHandler(DataBaseViolationException.class)
+    public ResponseEntity<StandardError> dataBaseViolation(DataBaseViolationException e, HttpServletRequest request){
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError error = new StandardError();
+        error.setTimestamp(Instant.now());
+        error.setStatus(status.value());
+        error.setError("Broken integration at DB please verify");
         error.setMessage(e.getMessage());
         error.setPath(request.getRequestURI());
         return ResponseEntity.status(status).body(error);
