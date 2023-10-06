@@ -17,6 +17,7 @@ public class Registration {
     private Double discount;
     private boolean paid;
     private LocalDate payday;
+    private LocalDate dueDate;
     private Double received;
 
     @ManyToOne
@@ -100,5 +101,13 @@ public class Registration {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 }

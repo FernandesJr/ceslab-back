@@ -18,6 +18,7 @@ public class MonthPayment {
     private Double received;
     private boolean paid;
     private LocalDate payday;
+    private LocalDate dueDate;
 
     @ManyToOne
     private Team team;
@@ -29,12 +30,13 @@ public class MonthPayment {
 
     public MonthPayment(){}
 
-    public MonthPayment(Long id, Double price, Double discount, boolean paid, LocalDate payday) {
+    public MonthPayment(Long id, Double price, Double discount, boolean paid, LocalDate payday, LocalDate dueDate) {
         this.id = id;
         this.price = price;
         this.discount = discount;
         this.paid = paid;
         this.payday = payday;
+        this.dueDate = dueDate;
     }
 
     public Long getId() {
@@ -83,5 +85,13 @@ public class MonthPayment {
 
     public void setReceived(Double received) {
         this.received = received;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 }
