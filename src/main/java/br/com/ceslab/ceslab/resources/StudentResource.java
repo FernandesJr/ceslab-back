@@ -26,4 +26,10 @@ public class StudentResource {
         StudentDTO studentDTO = this.service.update(dto, id);
         return ResponseEntity.ok(studentDTO);
     }
+
+    @DeleteMapping("/{id}/team/{teamId}")
+    public ResponseEntity<Void> removeStudentTeam(@PathVariable Long id, @PathVariable Long teamId) {
+        this.service.removeStudentOfTeam(id, teamId);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -4,6 +4,7 @@ import br.com.ceslab.ceslab.dto.TeamDTO;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -68,5 +69,18 @@ public class Team {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Team)) return false;
+        Team team = (Team) o;
+        return getId().equals(team.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }
