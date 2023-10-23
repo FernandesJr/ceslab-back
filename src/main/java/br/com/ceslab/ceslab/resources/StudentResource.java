@@ -20,10 +20,22 @@ public class StudentResource {
         return ResponseEntity.ok(dto);
     }
 
+    @GetMapping("/cpf/{cpf}")
+    public ResponseEntity<StudentDTO> findByCpf(@PathVariable String cpf) {
+        StudentDTO dto = service.findByCpf(cpf);
+        return ResponseEntity.ok(dto);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<StudentDTO> update(
             @Valid @RequestBody StudentDTO dto, @PathVariable Long id) {
         StudentDTO studentDTO = this.service.update(dto, id);
+        return ResponseEntity.ok(studentDTO);
+    }
+
+    @PostMapping("/team/{teamId}")
+    public ResponseEntity<StudentDTO> addStudentTeam(@RequestBody StudentDTO dto, @PathVariable Long teamId) {
+        StudentDTO studentDTO = this.service.addStudentOfTeam(dto, teamId);
         return ResponseEntity.ok(studentDTO);
     }
 

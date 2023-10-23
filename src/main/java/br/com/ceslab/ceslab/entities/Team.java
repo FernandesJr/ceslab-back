@@ -3,6 +3,7 @@ package br.com.ceslab.ceslab.entities;
 import br.com.ceslab.ceslab.dto.TeamDTO;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -16,6 +17,11 @@ public class Team {
     private Long id;
     private String name;
     private boolean completed;
+    private LocalDate startDate;
+    private LocalDate firstMonthPayment;
+    private Integer quantityMonths;
+    private Double priceRegistration;
+    private Double priceMonthPayments;
 
     @ManyToOne
     private Course course;
@@ -69,6 +75,46 @@ public class Team {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public Integer getQuantityMonths() {
+        return quantityMonths;
+    }
+
+    public void setQuantityMonths(Integer quantityMonths) {
+        this.quantityMonths = quantityMonths;
+    }
+
+    public LocalDate getFirstMonthPayment() {
+        return firstMonthPayment;
+    }
+
+    public void setFirstMonthPayment(LocalDate firstMonthPayment) {
+        this.firstMonthPayment = firstMonthPayment;
+    }
+
+    public Double getPriceRegistration() {
+        return priceRegistration;
+    }
+
+    public void setPriceRegistration(Double priceRegistration) {
+        this.priceRegistration = priceRegistration;
+    }
+
+    public Double getPriceMonthPayments() {
+        return priceMonthPayments;
+    }
+
+    public void setPriceMonthPayments(Double priceMonthPayments) {
+        this.priceMonthPayments = priceMonthPayments;
     }
 
     @Override

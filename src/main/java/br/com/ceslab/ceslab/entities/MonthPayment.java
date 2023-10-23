@@ -94,4 +94,20 @@ public class MonthPayment {
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 }

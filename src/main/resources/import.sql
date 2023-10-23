@@ -18,8 +18,8 @@ INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0324', true, 1);
 INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0424', true, 1);
 INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0524', true, 1);
 INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0624', true, 1);
-INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0724', false, 1);
-INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0824', false, 1);
+INSERT INTO tb_team (name, completed, course_id, start_date, quantity_months, first_month_payment, price_registration, price_month_payments) VALUES ('ctf0724', false, 1, '2023-07-01', 3, '2023-07-15', 150, 170);
+INSERT INTO tb_team (name, completed, course_id, start_date, quantity_months, first_month_payment, price_registration, price_month_payments) VALUES ('ctf0824', false, 1, '2023-07-01', 3, '2023-07-15', 150, 170);
 
 INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Odair Guimarães Pereira', '81992208527', '1990-01-01', '102.940.284-12');
 INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Maria Fabielle Soares Da Silva', '81991100809', '1990-02-01', '125.962.574-59');
