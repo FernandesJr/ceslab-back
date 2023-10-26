@@ -6,20 +6,20 @@ INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
 
 INSERT INTO tb_course (name) VALUES ('flebotomia');
 
-INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0323', true, 1);
-INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0423', true, 1);
-INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0523', true, 1);
-INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0623', true, 1);
-INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0723', true, 1);
-INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0823', true, 1);
-INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0124', true, 1);
-INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0224', true, 1);
-INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0324', true, 1);
-INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0424', true, 1);
-INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0524', true, 1);
-INSERT INTO tb_team (name, completed, course_id) VALUES ('ctf0624', true, 1);
-INSERT INTO tb_team (name, completed, course_id, start_date, quantity_months, first_month_payment, price_registration, price_month_payments) VALUES ('ctf0724', false, 1, '2023-07-01', 3, '2023-07-15', 150, 170);
-INSERT INTO tb_team (name, completed, course_id, start_date, quantity_months, first_month_payment, price_registration, price_month_payments) VALUES ('ctf0824', false, 1, '2023-07-01', 3, '2023-07-15', 150, 170);
+INSERT INTO tb_team (name, completed, course_id) VALUES ('CTF0323', true, 1);
+INSERT INTO tb_team (name, completed, course_id) VALUES ('CTF0423', true, 1);
+INSERT INTO tb_team (name, completed, course_id) VALUES ('CTF0523', true, 1);
+INSERT INTO tb_team (name, completed, course_id) VALUES ('CTF0623', true, 1);
+INSERT INTO tb_team (name, completed, course_id) VALUES ('CTF0723', true, 1);
+INSERT INTO tb_team (name, completed, course_id) VALUES ('CTF0823', true, 1);
+INSERT INTO tb_team (name, completed, course_id) VALUES ('CTF0124', true, 1);
+INSERT INTO tb_team (name, completed, course_id) VALUES ('CTF0224', true, 1);
+INSERT INTO tb_team (name, completed, course_id) VALUES ('CTF0324', true, 1);
+INSERT INTO tb_team (name, completed, course_id) VALUES ('CTF0424', true, 1);
+INSERT INTO tb_team (name, completed, course_id) VALUES ('CTF0524', true, 1);
+INSERT INTO tb_team (name, completed, course_id) VALUES ('CTF0624', true, 1);
+INSERT INTO tb_team (name, completed, course_id, start_date, quantity_months, first_month_payment, price_registration, price_month_payments) VALUES ('CTF0724', false, 1, '2023-07-01', 3, '2023-07-15', 150, 170);
+INSERT INTO tb_team (name, completed, course_id, start_date, quantity_months, first_month_payment, price_registration, price_month_payments) VALUES ('CTF0824', false, 1, '2023-07-01', 3, '2023-07-15', 150, 170);
 
 INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Odair Guimarães Pereira', '81992208527', '1990-01-01', '102.940.284-12');
 INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Maria Fabielle Soares Da Silva', '81991100809', '1990-02-01', '125.962.574-59');

@@ -33,6 +33,12 @@ public class TeamResource {
         return ResponseEntity.ok(dto);
     }
 
+    @GetMapping("/name/{name}")
+    public ResponseEntity<TeamDTO> findByName(@PathVariable String name){
+        TeamDTO dto = service.findByName(name);
+        return ResponseEntity.ok(dto);
+    }
+
     @PostMapping()
     public ResponseEntity<TeamDTO> create(@RequestBody @Valid TeamDTO dto) {
         TeamDTO teamDTO = service.create(dto);

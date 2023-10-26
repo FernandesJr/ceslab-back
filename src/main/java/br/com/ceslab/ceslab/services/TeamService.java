@@ -4,7 +4,9 @@ import br.com.ceslab.ceslab.dto.StudentDTO;
 import br.com.ceslab.ceslab.dto.TeamDTO;
 import br.com.ceslab.ceslab.entities.Course;
 import br.com.ceslab.ceslab.entities.Team;
+import br.com.ceslab.ceslab.repositories.CourseRepository;
 import br.com.ceslab.ceslab.repositories.TeamRepository;
+import br.com.ceslab.ceslab.services.exceptions.DataBaseViolationException;
 import br.com.ceslab.ceslab.services.exceptions.ResourceNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +23,9 @@ public class TeamService {
 
     @Autowired
     private TeamRepository repository;
+
+    @Autowired
+    private CourseRepository courseRepository;
 
     @Autowired
     private StudentService studentService;
@@ -40,12 +45,33 @@ public class TeamService {
         return new TeamDTO(entity);
     }
 
+    @Transactional(readOnly = true)
+    public TeamDTO findByName(String name){
+        Team entity = repository.findByName(name.toUpperCase());
+        if (entity == null) return null;
+        return new TeamDTO(entity);
+    }
+
     @Transactional
     public TeamDTO create(TeamDTO dto){
+
+        //Verify if course exist
+        Course course = courseRepository.findById(dto.getCourseDTO().getId())
+                .orElseThrow(() -> new ResourceNotFound("Course not found with id " + dto.getCourseDTO().getId()));
+
+        //Verify if name of team exist
+        Team teamByName = repository.findByName(dto.getName());
+        if (teamByName != null) throw new DataBaseViolationException("Name for Team already exist");
+
         Team team = new Team();
-        team.setName(dto.getName());
+        team.setName(dto.getName().toUpperCase());
         team.setCompleted(false);
-        team.setCourse(new Course(dto.getCourseDTO().getId()));
+        team.setCourse(course);
+        team.setStartDate(dto.getStartDate());
+        team.setPriceRegistration(dto.getPriceRegistration());
+        team.setQuantityMonths(dto.getQuantityMonths());
+        team.setPriceMonthPayments(dto.getPriceMonthPayments());
+        team.setFirstMonthPayment(dto.getFirstMonthPayment());
         Team entity = repository.save(team);
         return new TeamDTO(entity);
     }

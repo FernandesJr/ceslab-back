@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class TeamDTO implements Serializable {
 
@@ -15,6 +16,12 @@ public class TeamDTO implements Serializable {
 
     @NotNull
     private boolean completed;
+
+    private LocalDate startDate;
+    private LocalDate firstMonthPayment;
+    private Integer quantityMonths;
+    private Double priceRegistration;
+    private Double priceMonthPayments;
 
     private CourseDTO courseDTO;
 
@@ -31,6 +38,11 @@ public class TeamDTO implements Serializable {
         this.name = entity.getName();
         this.completed = entity.isCompleted();
         this.courseDTO = new CourseDTO(entity.getCourse());
+        this.startDate = entity.getStartDate();
+        this.firstMonthPayment = entity.getFirstMonthPayment();
+        this.quantityMonths = entity.getQuantityMonths();
+        this.priceMonthPayments = entity.getPriceMonthPayments();
+        this.priceRegistration = entity.getPriceRegistration();
     }
 
     public Long getId() {
@@ -63,5 +75,45 @@ public class TeamDTO implements Serializable {
 
     public void setCourseDTO(CourseDTO courseDTO) {
         this.courseDTO = courseDTO;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getFirstMonthPayment() {
+        return firstMonthPayment;
+    }
+
+    public void setFirstMonthPayment(LocalDate firstMonthPayment) {
+        this.firstMonthPayment = firstMonthPayment;
+    }
+
+    public Integer getQuantityMonths() {
+        return quantityMonths;
+    }
+
+    public void setQuantityMonths(Integer quantityMonths) {
+        this.quantityMonths = quantityMonths;
+    }
+
+    public Double getPriceRegistration() {
+        return priceRegistration;
+    }
+
+    public void setPriceRegistration(Double priceRegistration) {
+        this.priceRegistration = priceRegistration;
+    }
+
+    public Double getPriceMonthPayments() {
+        return priceMonthPayments;
+    }
+
+    public void setPriceMonthPayments(Double priceMonthPayments) {
+        this.priceMonthPayments = priceMonthPayments;
     }
 }
