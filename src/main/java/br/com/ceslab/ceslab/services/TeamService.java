@@ -78,7 +78,15 @@ public class TeamService {
 
     @Transactional
     public TeamDTO update(Long id, TeamDTO dto){
+
         Team entity = repository.findById(id).orElseThrow(() -> new ResourceNotFound("Class not found"));
+
+        if (!entity.getName().equals(dto.getName())) {
+            // Name is unique so need to check
+            Team entityByName = repository.findByName(dto.getName());
+            if (entityByName != null && entityByName.getId() != id)
+                throw new DataBaseViolationException("Name already in use");
+        }
         entity.setName(dto.getName());
         entity.setCompleted(dto.isCompleted());
         return new TeamDTO(entity);
