@@ -92,6 +92,13 @@ public class TeamService {
         return new TeamDTO(entity);
     }
 
+    @Transactional
+    public void delete(Long id) {
+        Team entity = repository.findById(id).orElseThrow(() -> new ResourceNotFound("Team not found"));
+        if (!entity.getStudents().isEmpty()) throw new DataBaseViolationException("Team contain students");
+        repository.delete(entity);
+    }
+
     public List<StudentDTO> findStudentsByTeam(Long id){
         return this.studentService.findByTeam(new Team(id));
     }

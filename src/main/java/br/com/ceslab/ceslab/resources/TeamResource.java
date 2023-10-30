@@ -60,4 +60,10 @@ public class TeamResource {
         List<StudentDTO> dtos = service.findStudentsByTeam(id);
         return ResponseEntity.ok(dtos);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id){
+        this.service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

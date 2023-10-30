@@ -1,6 +1,7 @@
 package br.com.ceslab.ceslab.entities;
 
 import br.com.ceslab.ceslab.dto.TeamDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -29,6 +30,7 @@ public class Team {
     @ManyToOne
     private Course course;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "teams")
     private Set<Student> students = new HashSet<>();
 
@@ -118,6 +120,10 @@ public class Team {
 
     public void setPriceMonthPayments(Double priceMonthPayments) {
         this.priceMonthPayments = priceMonthPayments;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
     }
 
     @Override
