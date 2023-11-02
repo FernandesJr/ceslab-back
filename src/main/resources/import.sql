@@ -1,4 +1,5 @@
-INSERT INTO tb_user (email, password) VALUES ('fer@email.com', '$2a$10$XUf0WzsgyRVc0Yx.b3uzAuhIrk2kefwG5b5kzwj14oKk9ggeYQY1u')
+INSERT INTO tb_user (email, password, name) VALUES ('fer@email.com', '$2a$10$XUf0WzsgyRVc0Yx.b3uzAuhIrk2kefwG5b5kzwj14oKk9ggeYQY1u', 'gilberto');
+INSERT INTO tb_user (email, password, name) VALUES ('geo@email.com', '$2a$10$XUf0WzsgyRVc0Yx.b3uzAuhIrk2kefwG5b5kzwj14oKk9ggeYQY1u', 'geovanna');
 
 INSERT INTO tb_role (authority) VALUES ('ADMIN');
 
