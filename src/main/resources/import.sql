@@ -41,6 +41,9 @@ INSERT INTO tb_registration (price, discount, received, paid, due_date, payday, 
 INSERT INTO tb_registration (price, discount, received, paid, due_date, payday, student_id, team_id) VALUES (150, 0, 130, false, '2023-07-13', '2023-07-17', 3, 14);
 INSERT INTO tb_registration (price, discount, received, paid, due_date, payday, student_id, team_id) VALUES (150, 0, 0, false, '2023-07-13', '2023-07-17', 4, 14);
 
+
+INSERT INTO tb_payment_voucher (student_id, team_id, registration_id, month_payment_id, price, discount, received, generation_date) VALUES (4, 14, 4, null, 150, 0, 75,  TIMESTAMP WITH TIME ZONE '2023-11-05T15:00:00Z');
+
 INSERT INTO tb_month_payment (price, discount, received, paid, due_date, payday, student_id, team_id) VALUES (170, 0, 170, false, '2023-08-01', '2023-08-05', 1, 13);
 INSERT INTO tb_month_payment (price, discount, received, paid, due_date, payday, student_id, team_id) VALUES (170, 20, 150, false, '2023-08-01', '2023-08-05', 2, 13);
 INSERT INTO tb_month_payment (price, discount, received, paid, due_date, payday, student_id, team_id) VALUES (170, 0, 0, false, '2023-08-01', '2023-08-05', 3, 14);
