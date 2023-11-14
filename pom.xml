@@ -47,6 +47,11 @@
 			<version>9.14.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.20.6</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.h2database</groupId>

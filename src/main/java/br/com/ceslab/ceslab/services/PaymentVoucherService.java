@@ -42,6 +42,9 @@ public class PaymentVoucherService {
     @Autowired
     private MonthPaymentRepository monthPaymentRepository;
 
+    @Autowired
+    private JasperService jasperService;
+
     @Transactional(readOnly = true)
     public PaymentVoucher findById(Long id) {
         return repository.findById(id)
@@ -49,7 +52,7 @@ public class PaymentVoucherService {
     }
 
     @Transactional
-    public PaymentVoucher createForRegistration(Long registrationId) {
+    public PaymentVoucher createForRegistration(Long registrationId, boolean... sendSms) {
         Registration registration = this.registrationRepository.findById(registrationId)
                 .orElseThrow(() -> new ResourceNotFound("Registration not found with id " + registrationId));
 
@@ -62,12 +65,12 @@ public class PaymentVoucherService {
         paymentVoucher.setReceived(registration.getReceived());
         paymentVoucher.setGenerationDate(LocalDateTime.now());
         PaymentVoucher entity = repository.save(paymentVoucher);
-        this.sendSms(entity);
+        if (sendSms.length > 0 && sendSms[0]) this.sendSms(entity);
         return entity;
     }
 
     @Transactional
-    public PaymentVoucher createForMonthPayment(Long monthPaymentId) {
+    public PaymentVoucher createForMonthPayment(Long monthPaymentId, boolean... sendSms) {
         MonthPayment monthPayment = this.monthPaymentRepository.findById(monthPaymentId)
                 .orElseThrow(() -> new ResourceNotFound("Month Payment not found with id " + monthPaymentId));
 
@@ -80,7 +83,7 @@ public class PaymentVoucherService {
         paymentVoucher.setReceived(monthPayment.getReceived());
         paymentVoucher.setGenerationDate(LocalDateTime.now());
         PaymentVoucher entity = repository.save(paymentVoucher);
-        this.sendSms(entity);
+        if (sendSms.length > 0 && sendSms[0]) this.sendSms(entity);
         return entity;
     }
 
@@ -108,5 +111,15 @@ public class PaymentVoucherService {
                 bodyText
             ).create();
         }
+    }
+
+    public byte[] createPdfByRegistration(Long registrationId) {
+        PaymentVoucher paymentVoucher = this.createForRegistration(registrationId);
+        return this.jasperService.createPdfPaymentVoucher(paymentVoucher.getId());
+    }
+
+    public byte[] createPdfByMonthPayment(Long monthPaymentId) {
+        PaymentVoucher paymentVoucher = this.createForMonthPayment(monthPaymentId);
+        return this.jasperService.createPdfPaymentVoucher(paymentVoucher.getId());
     }
 }
