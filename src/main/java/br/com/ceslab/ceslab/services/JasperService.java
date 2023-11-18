@@ -24,7 +24,7 @@ public class JasperService {
     @Autowired
     private ResourceLoader resourceLoader;
 
-    private static final String DIRECTORY_JASPER = "classpath:jasper/";
+    private static final String DIRECTORY_JASPER = "classpath:/jasper/";
 
     private Map<String, Object> params = new HashMap<>();
 

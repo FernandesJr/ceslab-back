@@ -40,8 +40,8 @@ public class PaymentVoucherResource {
         byte[] bytes = this.service.createPdfByRegistration(registrationId);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_PDF)
-                .header("Content-disposition", "inline; filename=payment-voucher")
-                //.header("Content-disposition", "attachment; filename=payment-voucher") to download
+                .header("Content-disposition", "inline; filename=payment-voucher.pdf")
+                //.header("Content-disposition", "attachment; filename=payment-voucher.pdf") to download
                 .body(bytes);
     }
 
@@ -50,8 +50,8 @@ public class PaymentVoucherResource {
         byte[] bytes = this.service.createPdfByMonthPayment(monthPaymentId);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_PDF)
-                .header("Content-disposition", "inline; filename=payment-voucher")
-                //.header("Content-disposition", "attachment; filename=payment-voucher") to download
+                .header("Content-disposition", "inline; filename=payment-voucher.pdf")
+                // .header("Content-disposition", "attachment; filename=payment-voucher.pdf") //to download
                 .body(bytes);
     }
 }
