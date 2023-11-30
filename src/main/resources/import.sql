@@ -53,3 +53,8 @@ INSERT INTO tb_month_payment (price, discount, received, paid, due_date, payday,
 
 
 INSERT INTO tb_degree (code, generation_date, student_id, team_id) VALUES ('ctf0323-01f3d06f-54d9-4472-bd49-44a3c25ac663-20230709-181050', '2023-07-07 15:24:45', 1, 13);
+
+
+INSERT INTO tb_expense (emission, cost, course_id, description) VALUES ('2023-07-09', 385.45 , 1, 'Material para aulas práticas');
+INSERT INTO tb_expense (emission, cost, course_id, description) VALUES ('2023-11-29', 25.00 , 1, 'Resma de papel');
+INSERT INTO tb_expense (emission, cost, course_id, description) VALUES ('2023-11-29', 125.00 , 1, 'Abraçadeira');
