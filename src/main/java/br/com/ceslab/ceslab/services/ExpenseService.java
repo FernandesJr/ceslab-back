@@ -15,11 +15,16 @@ public class ExpenseService {
     @Autowired
     private ExpenseRepository repository;
 
-
     @Transactional(readOnly = true)
     public List<Expense> findSearch(LocalDate start, LocalDate end, Long courseId) {
         if (start == null) start = LocalDate.now().minusMonths(1);
         if (end == null) end = LocalDate.now();
         return repository.findBySearch(start, end, courseId);
+    }
+
+    @Transactional
+    public Expense create(Expense dto) {
+        dto.setEmission(LocalDate.now());
+        return repository.save(dto);
     }
 }
