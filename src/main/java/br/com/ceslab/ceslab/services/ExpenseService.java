@@ -27,4 +27,9 @@ public class ExpenseService {
         dto.setEmission(LocalDate.now());
         return repository.save(dto);
     }
+
+    @Transactional
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 }

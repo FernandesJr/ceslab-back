@@ -31,4 +31,10 @@ public class ExpenseResource {
         Expense expense = service.create(dto);
         return ResponseEntity.ok(expense);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
