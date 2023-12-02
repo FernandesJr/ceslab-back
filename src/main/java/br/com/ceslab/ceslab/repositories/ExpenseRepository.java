@@ -10,9 +10,9 @@ import java.util.List;
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
     @Query(nativeQuery = true, value =
-            "SELECT * FROM TB_EXPENSE " +
+            "SELECT * FROM tb_expense " +
             "WHERE emission BETWEEN :start AND :end AND " +
-            "(:courseId IS NULL OR COURSE_ID = :courseId) " +
+            "(:courseId IS NULL OR course_id = :courseId) " +
             "ORDER BY emission DESC, id DESC")
     public List<Expense> findBySearch(LocalDate start, LocalDate end, Long courseId);
 }
