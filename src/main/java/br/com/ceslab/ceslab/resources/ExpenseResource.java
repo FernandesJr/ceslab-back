@@ -26,7 +26,7 @@ public class ExpenseResource {
         return ResponseEntity.ok(dto);
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Expense> create(@RequestBody Expense dto) {
         Expense expense = service.create(dto);
         return ResponseEntity.ok(expense);
@@ -36,5 +36,11 @@ public class ExpenseResource {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Expense> update(@RequestBody Expense dto, @PathVariable Long id) {
+        Expense expense = service.update(dto, id);
+        return ResponseEntity.ok(expense);
     }
 }

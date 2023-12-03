@@ -32,4 +32,10 @@ public class ExpenseService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
+    @Transactional
+    public Expense update(Expense dto, Long id) {
+        dto.setId(id);
+        return repository.save(dto);
+    }
 }
