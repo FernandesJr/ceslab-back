@@ -1,6 +1,8 @@
 package br.com.ceslab.ceslab.resources;
 
 import br.com.ceslab.ceslab.dto.DegreeDTO;
+import br.com.ceslab.ceslab.dto.degree.DegreeCreateDTO;
+import br.com.ceslab.ceslab.entities.Degree;
 import br.com.ceslab.ceslab.services.DegreeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +21,15 @@ public class DegreeResource {
         return ResponseEntity.ok(dto);
     }
 
+    @GetMapping("/student/{idStudent}/team/{idTeam}")
+    public ResponseEntity<DegreeDTO> findByStudentAndTeam(@PathVariable(name = "idStudent") Long studentId,
+                                                          @PathVariable(name = "idTeam") Long teamId) {
+        DegreeDTO dto = service.findByStudentAndTeam(studentId, teamId);
+        return ResponseEntity.ok(dto);
+    }
+
     @PostMapping
-    public ResponseEntity<DegreeDTO> create(@RequestBody DegreeDTO dto) {
+    public ResponseEntity<DegreeDTO> create(@RequestBody DegreeCreateDTO dto) {
         DegreeDTO degreeDTO = service.create(dto);
         return ResponseEntity.ok(degreeDTO);
     }
