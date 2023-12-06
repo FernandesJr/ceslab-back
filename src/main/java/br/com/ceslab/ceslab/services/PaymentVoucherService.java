@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 @Service
@@ -65,7 +66,7 @@ public class PaymentVoucherService {
         paymentVoucher.setReceived(registration.getReceived());
         paymentVoucher.setGenerationDate(LocalDateTime.now());
         PaymentVoucher entity = repository.save(paymentVoucher);
-        if (sendSms.length > 0 && sendSms[0]) this.sendSms(entity);
+        if (sendSms.length > 0 && sendSms[0]) this.sendSms(entity, null);
         return entity;
     }
 
@@ -83,34 +84,46 @@ public class PaymentVoucherService {
         paymentVoucher.setReceived(monthPayment.getReceived());
         paymentVoucher.setGenerationDate(LocalDateTime.now());
         PaymentVoucher entity = repository.save(paymentVoucher);
-        if (sendSms.length > 0 && sendSms[0]) this.sendSms(entity);
+        if (sendSms.length > 0 && sendSms[0]) this.sendSms(entity, monthPayment);
         return entity;
     }
 
-    private void sendSms(PaymentVoucher paymentVoucher) {
+    private void sendSms(PaymentVoucher paymentVoucher, MonthPayment monthPayment) {
 
-        if (!Arrays.asList(environment.getActiveProfiles()).contains("test")) {
+        if (!this.isModeTest()) {
             Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
-            String discount = (paymentVoucher.getDiscount() != 0) ?
-                "Desconto: R$ " + String.valueOf(paymentVoucher.getDiscount()).replace(".", ",") + "\n"
-                : "";
-
             String bodyText =
-                "Olá, " + paymentVoucher.getStudent().getName() +
-                " aqui está seu COMPROVANTE DE PAGAMENTO CESLAB:\n" +
-                "Valor total: R$ " + String.valueOf(paymentVoucher.getPrice()).replace(".", ",") + "\n" +
-                discount +
-                "Valor pago: R$ " + String.valueOf(paymentVoucher.getReceived()).replace(".", ",") + "\n" +
-                paymentVoucher.getTeam().getName() + "\n" +
-                "code " + paymentVoucher.getId() + " " + paymentVoucher.getGenerationDate();
+                    "Olá, " + paymentVoucher.getStudent().getName() +
+                    " aqui está seu COMPROVANTE DE PAGAMENTO CESLAB \n" +
+                    this.createDescription(paymentVoucher, monthPayment) +
+                    "Valor total: R$ " + String.valueOf(paymentVoucher.getPrice()).replace(".", ",") + "\n" +
+                    this.hasDiscount(paymentVoucher.getDiscount()) +
+                    "Valor pago: R$ " + String.valueOf(paymentVoucher.getReceived()).replace(".", ",") + "\n" +
+                    paymentVoucher.getTeam().getName() + "\n" +
+                    "code " + paymentVoucher.getId() + " " + paymentVoucher.getGenerationDate();
 
             Message message = Message.creator(
-                new com.twilio.type.PhoneNumber("+55" + paymentVoucher.getStudent().getPhone()),
-                new com.twilio.type.PhoneNumber(MY_NUMBER_PHONE),
-                bodyText
+                    new com.twilio.type.PhoneNumber("+55" + paymentVoucher.getStudent().getPhone()),
+                    new com.twilio.type.PhoneNumber(MY_NUMBER_PHONE),
+                    bodyText
             ).create();
         }
+    }
+
+    private boolean isModeTest() {
+        return Arrays.asList(environment.getActiveProfiles()).contains("test");
+    }
+
+    private String hasDiscount(Double discount) {
+        return discount != 0 ?
+            "Desconto: R$ " + String.valueOf(discount).replace(".", ",") + "\n"
+            : "";
+    }
+
+    private String createDescription(PaymentVoucher voucher,  MonthPayment monthPayment) {
+        if (voucher.getMonthPaymentId() == null) return "Matrícula \n";
+        return "Mensalidade: " + monthPayment.getDueDate().format(DateTimeFormatter.ofPattern("MM/yyyy")) + "\n";
     }
 
     public byte[] createPdfByRegistration(Long registrationId) {
