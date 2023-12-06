@@ -4,6 +4,8 @@ import br.com.ceslab.ceslab.dto.StudentDTO;
 import br.com.ceslab.ceslab.services.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,14 @@ public class StudentResource {
 
     @Autowired
     private StudentService service;
+
+    @GetMapping
+    public ResponseEntity<Page<StudentDTO>> findAll(
+            @RequestParam(name = "name", required = false, defaultValue = "") String name,
+            Pageable pageable) {
+        Page<StudentDTO> dto = service.findAll(name, pageable);
+        return ResponseEntity.ok(dto);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<StudentDTO> findById(@PathVariable Long id) {
