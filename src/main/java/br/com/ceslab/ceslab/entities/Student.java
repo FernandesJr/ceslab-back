@@ -23,6 +23,8 @@ public class Student {
     @Column(unique = true)
     private String cpf;
 
+    private String observation;
+
     @ManyToMany
     @JoinTable(
             name = "tb_team_student",
@@ -42,12 +44,13 @@ public class Student {
         this.id = id;
     }
 
-    public Student(Long id, String name, String phone, LocalDate dateBirth, String cpf) {
+    public Student(Long id, String name, String phone, LocalDate dateBirth, String cpf, String observation) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.dateBirth = dateBirth;
         this.cpf = cpf;
+        this.observation = observation;
     }
 
     public Long getId() {
@@ -100,5 +103,13 @@ public class Student {
 
     public List<Registration> getRegistrations() {
         return registrations;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
     }
 }

@@ -75,6 +75,7 @@ public class StudentService {
             entity.setCpf(dto.getCpf());
             entity.setPhone(dto.getPhone());
             entity.setDateBirth(dto.getDateBirth());
+            entity.setObservation(dto.getObservation());
             return new StudentDTO(entity);
         } catch (Exception e) {
            throw new ResourceNotFound("Student not found with id: " + id);

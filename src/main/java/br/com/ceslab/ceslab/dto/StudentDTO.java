@@ -24,17 +24,20 @@ public class StudentDTO implements Serializable{
     @NotBlank
     private String cpf;
 
+    private String observation;
+
     private List<MonthPayment> monthPayments = new ArrayList<>();
     private List<Registration> registrations = new ArrayList<>();
 
     public StudentDTO(){}
 
-    public StudentDTO(Long id, String name, String phone, LocalDate dateBirth, String cpf) {
+    public StudentDTO(Long id, String name, String phone, LocalDate dateBirth, String cpf, String observation) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.dateBirth = dateBirth;
         this.cpf = cpf;
+        this.observation = observation;
     }
 
     public StudentDTO(Student entity) {
@@ -43,6 +46,7 @@ public class StudentDTO implements Serializable{
         this.phone = entity.getPhone();
         this.dateBirth = entity.getDateBirth();
         this.cpf = entity.getCpf();
+        this.observation = entity.getObservation();
         this.addMonthPayment(entity.getMonthPayments());
         this.addRegistration(entity.getRegistrations());
     }
@@ -111,5 +115,13 @@ public class StudentDTO implements Serializable{
 
     public void setRegistrations(List<Registration> registrations) {
         this.registrations = registrations;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
     }
 }
