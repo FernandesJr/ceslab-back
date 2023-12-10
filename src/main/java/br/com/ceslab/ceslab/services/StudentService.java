@@ -168,4 +168,11 @@ public class StudentService {
         }
 
     }
+
+    @Transactional
+    public void delete(Long id) {
+        List<String> teams = repository.hasStudentTeam(id);
+        if (teams.isEmpty()) repository.deleteById(id);
+        else throw new DataBaseViolationException("Student with relationship in " + teams.get(0));
+    }
 }
