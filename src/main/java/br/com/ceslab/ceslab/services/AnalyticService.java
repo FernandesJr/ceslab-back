@@ -40,7 +40,7 @@ public class AnalyticService {
         List<ProfitMonthPaymentForMonth> dto = this.createAllMonthsOfYeah();
 
         monthPayments.forEach(m -> {
-            switch (m.getPayday().getMonth()) {
+            switch (m.getDuedate().getMonth()) {
                 case JANUARY -> dto.forEach(pm -> {if (pm.getName().equals("JANEIRO")) pm.setValue(pm.getValue() + m.getReceived());});
                 case FEBRUARY -> dto.forEach(pm -> {if (pm.getName().equals("FEVEREIRO")) pm.setValue(pm.getValue() + m.getReceived());});
                 case MARCH -> dto.forEach(pm -> {if (pm.getName().equals("MARÇO")) pm.setValue(pm.getValue() + m.getReceived());});
