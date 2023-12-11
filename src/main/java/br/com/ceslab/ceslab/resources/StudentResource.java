@@ -43,6 +43,12 @@ public class StudentResource {
         return ResponseEntity.ok(studentDTO);
     }
 
+    @PostMapping()
+    public ResponseEntity<StudentDTO> create(@Valid @RequestBody StudentDTO dto) {
+        StudentDTO studentDTO = new StudentDTO(this.service.create(dto));
+        return ResponseEntity.ok(studentDTO);
+    }
+
     @PostMapping("/team/{teamId}")
     public ResponseEntity<StudentDTO> addStudentTeam(@RequestBody StudentDTO dto, @PathVariable Long teamId) {
         StudentDTO studentDTO = this.service.addStudentOfTeam(dto, teamId);

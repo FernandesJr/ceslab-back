@@ -84,6 +84,8 @@ public class StudentService {
 
     @Transactional
     public Student create(StudentDTO dto) {
+        if (this.findByCpf(dto.getCpf()) != null)
+            throw new DataBaseViolationException("CPF already in use");
         Student student = new Student();
         student.setName(dto.getName());
         student.setCpf(dto.getCpf());
