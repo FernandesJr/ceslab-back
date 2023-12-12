@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    @Query("SELECT s FROM Student s WHERE s.name LIKE %:name%")
+    @Query("SELECT s FROM Student s WHERE LOWER(s.name) LIKE LOWER(CONCAT('%', :name, '%'))")
     Page<Student> findByNameContaining(String name, Pageable pageable);
 
     List<Student> findByTeams(Team team);
