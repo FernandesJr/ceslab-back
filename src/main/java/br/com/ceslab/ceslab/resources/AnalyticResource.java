@@ -1,6 +1,8 @@
 package br.com.ceslab.ceslab.resources;
 
-import br.com.ceslab.ceslab.dto.analytic.ProfitMonthPaymentForMonth;
+import br.com.ceslab.ceslab.dto.analytic.ExpenseByYearDTO;
+import br.com.ceslab.ceslab.dto.analytic.ProfitMonthPaymentForMonthDTO;
+import br.com.ceslab.ceslab.dto.analytic.ProfitRegistrationForMonthDTO;
 import br.com.ceslab.ceslab.services.AnalyticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +19,21 @@ public class AnalyticResource {
     @Autowired
     private AnalyticService service;
 
-    @GetMapping("/monthPayment/yeah")
-    private ResponseEntity<List<ProfitMonthPaymentForMonth>> monthPaymentForYeah() {
-        List<ProfitMonthPaymentForMonth> dto = service.getProfitMonthPaymentByMonth();
+    @GetMapping("/monthPayment/year")
+    private ResponseEntity<List<ProfitMonthPaymentForMonthDTO>> monthPaymentForYeah() {
+        List<ProfitMonthPaymentForMonthDTO> dto = service.getProfitMonthPaymentByMonth();
+        return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/registration/year")
+    private ResponseEntity<List<ProfitRegistrationForMonthDTO>> registrationForYeah() {
+        List<ProfitRegistrationForMonthDTO> dto = service.getProfitRegistrationByMonth();
+        return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/expense/year")
+    private ResponseEntity<ExpenseByYearDTO> expenseForYeah() {
+        ExpenseByYearDTO dto = service.getExpenseValueByYear();
         return ResponseEntity.ok(dto);
     }
 }

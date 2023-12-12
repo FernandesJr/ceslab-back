@@ -1,13 +1,13 @@
 package br.com.ceslab.ceslab.dto.analytic;
 
-public class ProfitMonthPaymentForMonth {
+public class ProfitByMonthGeneric {
 
     private String name;
     private Double value;
 
-    public ProfitMonthPaymentForMonth(){}
+    public ProfitByMonthGeneric(){}
 
-    public ProfitMonthPaymentForMonth(String name, Double value){
+    public ProfitByMonthGeneric(String name, Double value){
         this.name = name;
         this.value = value;
     }
