@@ -24,7 +24,7 @@ public class ExpenseService {
 
     @Transactional
     public Expense create(Expense dto) {
-        dto.setEmission(LocalDate.now());
+        if (dto.getEmission() == null) dto.setEmission(LocalDate.now());
         return repository.save(dto);
     }
 
