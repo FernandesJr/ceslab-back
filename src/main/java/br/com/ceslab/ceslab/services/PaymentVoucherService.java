@@ -82,6 +82,7 @@ public class PaymentVoucherService {
         paymentVoucher.setPrice(monthPayment.getPrice());
         paymentVoucher.setDiscount(monthPayment.getDiscount());
         paymentVoucher.setReceived(monthPayment.getReceived());
+        paymentVoucher.setDueDateMonthPayment(monthPayment.getDueDate());
         paymentVoucher.setGenerationDate(LocalDateTime.now());
         PaymentVoucher entity = repository.save(paymentVoucher);
         if (sendSms.length > 0 && sendSms[0]) this.sendSms(entity, monthPayment);
@@ -128,11 +129,11 @@ public class PaymentVoucherService {
 
     public byte[] createPdfByRegistration(Long registrationId) {
         PaymentVoucher paymentVoucher = this.createForRegistration(registrationId);
-        return this.jasperService.createPdfPaymentVoucher(paymentVoucher.getId());
+        return this.jasperService.createPdfPaymentVoucher(paymentVoucher);
     }
 
     public byte[] createPdfByMonthPayment(Long monthPaymentId) {
         PaymentVoucher paymentVoucher = this.createForMonthPayment(monthPaymentId);
-        return this.jasperService.createPdfPaymentVoucher(paymentVoucher.getId());
+        return this.jasperService.createPdfPaymentVoucher(paymentVoucher);
     }
 }

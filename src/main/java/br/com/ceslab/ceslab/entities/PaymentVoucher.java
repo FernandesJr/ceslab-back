@@ -2,6 +2,7 @@ package br.com.ceslab.ceslab.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,6 +24,7 @@ public class PaymentVoucher {
     private Double received;
     private Long registrationId;
     private Long monthPaymentId;
+    private LocalDate dueDateMonthPayment;
     private LocalDateTime generationDate;
 
     public PaymentVoucher(){}
@@ -89,6 +91,14 @@ public class PaymentVoucher {
 
     public void setMonthPaymentId(Long monthPaymentId) {
         this.monthPaymentId = monthPaymentId;
+    }
+
+    public LocalDate getDueDateMonthPayment() {
+        return dueDateMonthPayment;
+    }
+
+    public void setDueDateMonthPayment(LocalDate dueDateMonthPayment) {
+        this.dueDateMonthPayment = dueDateMonthPayment;
     }
 
     public LocalDateTime getGenerationDate() {
