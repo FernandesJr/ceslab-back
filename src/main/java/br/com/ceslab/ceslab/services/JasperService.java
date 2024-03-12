@@ -34,8 +34,7 @@ public class JasperService {
         try {
             Resource resource = resourceLoader.getResource(DIRECTORY_JASPER + "payment_voucher_params.jasper");
             InputStream stream = resource.getInputStream();
-            JasperPrint print = JasperFillManager.fillReport(stream, params);
-            //JasperPrint print = JasperFillManager.fillReport(stream, params, connection);
+            JasperPrint print = JasperFillManager.fillReport(stream, params, connection);
            return JasperExportManager.exportReportToPdf(print);
         } catch (FileNotFoundException | JRException e) {
             e.printStackTrace();
