@@ -1,10 +1,7 @@
 package br.com.ceslab.ceslab.services;
 
 import br.com.ceslab.ceslab.entities.PaymentVoucher;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -34,7 +31,8 @@ public class JasperService {
         try {
             Resource resource = resourceLoader.getResource(DIRECTORY_JASPER + "payment_voucher_params.jasper");
             InputStream stream = resource.getInputStream();
-            JasperPrint print = JasperFillManager.fillReport(stream, params, connection);
+            //JREmptyDataSource because haven't query in jasper
+            JasperPrint print = JasperFillManager.fillReport(stream, params, new JREmptyDataSource(1));
            return JasperExportManager.exportReportToPdf(print);
         } catch (FileNotFoundException | JRException e) {
             e.printStackTrace();
