@@ -53,6 +53,8 @@ public class JasperService {
         this.params.put("V_GENERATION_DATE", paymentVoucher.getGenerationDate());
         if (paymentVoucher.getMonthPaymentId() != null)
             this.params.put("V_DUE_DATE_MONTH_PAYMENT", paymentVoucher.getDueDateMonthPayment());
+        else
+            this.params.put("V_DUE_DATE_MONTH_PAYMENT", null);
     }
 
 }
