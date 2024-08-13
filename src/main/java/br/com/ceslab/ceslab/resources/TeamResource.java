@@ -22,8 +22,9 @@ public class TeamResource {
 
     @GetMapping
     public ResponseEntity<Page<TeamDTO>> findAll(
-            @RequestParam(name = "page", required = false, defaultValue = "0") int pageNumber){
-        Page<TeamDTO> page = service.findAll(pageNumber);
+            @RequestParam(name = "page", required = false, defaultValue = "0") int pageNumber,
+            @RequestParam(name = "courseid") Long idCourse){
+        Page<TeamDTO> page = service.findAllByCourse(pageNumber, idCourse);
         return ResponseEntity.ok(page);
     }
 

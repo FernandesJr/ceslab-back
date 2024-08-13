@@ -30,12 +30,11 @@ public class TeamService {
     @Autowired
     private StudentService studentService;
 
-
     @Transactional(readOnly = true)
-    public Page<TeamDTO> findAll(int pageNumber){
+    public Page<TeamDTO> findAllByCourse(int pageNumber, Long idCourse){
         //first page is 0
         Pageable pageable = PageRequest.of(pageNumber, 6, Sort.Direction.DESC, "id");
-        Page<Team> page = repository.findAll(pageable);
+        Page<Team> page = repository.findByCourse(new Course(idCourse), pageable);
         return page.map(p -> new TeamDTO(p));
     }
 

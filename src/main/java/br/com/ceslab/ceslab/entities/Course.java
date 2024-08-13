@@ -12,6 +12,8 @@ public class Course {
 
     private String name;
 
+    private Integer hours;
+
     public Course() {}
 
     public Course(Long id, String name) {
@@ -37,5 +39,13 @@ public class Course {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getHours() {
+        return hours;
+    }
+
+    public void setHours(Integer hours) {
+        this.hours = hours;
     }
 }

@@ -5,7 +5,8 @@ INSERT INTO tb_role (authority) VALUES ('ADMIN');
 
 INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
 
-INSERT INTO tb_course (name) VALUES ('flebotomia');
+INSERT INTO tb_course (name, hours) VALUES ('flebotomia', 200);
+INSERT INTO tb_course (name, hours) VALUES ('flebotomia plus', 50);
 
 INSERT INTO tb_team (name, completed, course_id) VALUES ('CTF0323', true, 1);
 INSERT INTO tb_team (name, completed, course_id) VALUES ('CTF0423', true, 1);
