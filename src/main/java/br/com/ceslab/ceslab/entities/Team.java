@@ -22,6 +22,7 @@ public class Team {
 
     private boolean completed;
     private LocalDate startDate;
+    private LocalDate endDate;
     private LocalDate firstMonthPayment;
     private Integer quantityMonths;
     private Double priceRegistration;
@@ -88,6 +89,14 @@ public class Team {
 
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public Integer getQuantityMonths() {

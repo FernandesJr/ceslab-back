@@ -12,6 +12,8 @@ public class CourseDTO implements Serializable {
     @NotBlank
     private String name;
 
+    private Integer hours;
+
     public CourseDTO() {}
 
     public CourseDTO(Long id, String name) {
@@ -22,6 +24,7 @@ public class CourseDTO implements Serializable {
     public CourseDTO(Course entity) {
         this.id = entity.getId();
         this.name = entity.getName();
+        this.hours = entity.getHours();
     }
 
     public Long getId() {
@@ -38,5 +41,13 @@ public class CourseDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getHours() {
+        return hours;
+    }
+
+    public void setHours(Integer hours) {
+        this.hours = hours;
     }
 }

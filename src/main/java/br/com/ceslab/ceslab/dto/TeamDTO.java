@@ -18,6 +18,7 @@ public class TeamDTO implements Serializable {
     private boolean completed;
 
     private LocalDate startDate;
+    private LocalDate endDate;
     private LocalDate firstMonthPayment;
     private Integer quantityMonths;
     private Double priceRegistration;
@@ -39,6 +40,7 @@ public class TeamDTO implements Serializable {
         this.completed = entity.isCompleted();
         this.courseDTO = new CourseDTO(entity.getCourse());
         this.startDate = entity.getStartDate();
+        this.endDate = entity.getEndDate();
         this.firstMonthPayment = entity.getFirstMonthPayment();
         this.quantityMonths = entity.getQuantityMonths();
         this.priceMonthPayments = entity.getPriceMonthPayments();
@@ -83,6 +85,14 @@ public class TeamDTO implements Serializable {
 
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public LocalDate getFirstMonthPayment() {

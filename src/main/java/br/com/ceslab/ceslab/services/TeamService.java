@@ -88,6 +88,7 @@ public class TeamService {
         }
         entity.setName(dto.getName());
         entity.setCompleted(dto.isCompleted());
+        entity.setEndDate(dto.getEndDate());
         return new TeamDTO(entity);
     }
 
