@@ -27,10 +27,10 @@ INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Odair Guimarães 
 INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Maria Fabielle Soares Da Silva', '81991100809', '1990-02-01', '125.962.574-59');
 
 INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Maria Fernanda da Silva Oliveira', '81998440931', '1990-03-01', '115.897.914-28');
-INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Luzia de Melo Valenca', '81998452127', '1990-05-01', '093.041.524-88');
+INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Luzia de Melo Valenca', '81998452127', '1990-05-01', '093.041.524-10');
+INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Bruna de Melo Valenca', '81998452127', '1990-05-01', '093.041.524-88');
 
-INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Ana de Melo Valenca', '81998452127', '1990-05-01', '093.041.524-10');
-INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Bruna de Melo Valenca', '81998452127', '1990-05-01', '093.041.524-11');
+INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Ana de Melo Valenca', '81998452127', '1990-05-01', '093.041.524-11');
 INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Carla de Melo Valenca', '81998452127', '1990-05-01', '093.041.524-12');
 INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Denise de Melo Valenca', '81998452127', '1990-05-01', '093.041.524-13');
 INSERT INTO tb_student (name, phone, date_birth, cpf) VALUES ('Eloisa de Melo Valenca', '81998452127', '1990-05-01', '093.041.524-14');

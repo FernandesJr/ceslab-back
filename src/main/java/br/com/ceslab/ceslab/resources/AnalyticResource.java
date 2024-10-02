@@ -1,6 +1,7 @@
 package br.com.ceslab.ceslab.resources;
 
 import br.com.ceslab.ceslab.dto.analytic.ExpenseByYearDTO;
+import br.com.ceslab.ceslab.dto.analytic.LineChart;
 import br.com.ceslab.ceslab.dto.analytic.ProfitMonthPaymentForMonthDTO;
 import br.com.ceslab.ceslab.dto.analytic.ProfitRegistrationForMonthDTO;
 import br.com.ceslab.ceslab.services.AnalyticService;
@@ -35,5 +36,11 @@ public class AnalyticResource {
     private ResponseEntity<ExpenseByYearDTO> expenseForYeah() {
         ExpenseByYearDTO dto = service.getExpenseValueByYear();
         return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/chart/line")
+    private ResponseEntity<List<LineChart>> getLinesChart() {
+        List<LineChart> linesDTO = service.getLinesChart();
+        return ResponseEntity.ok(linesDTO);
     }
 }

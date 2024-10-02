@@ -3,6 +3,7 @@ package br.com.ceslab.ceslab.repositories;
 import br.com.ceslab.ceslab.entities.MonthPayment;
 import br.com.ceslab.ceslab.entities.Student;
 import br.com.ceslab.ceslab.entities.Team;
+import br.com.ceslab.ceslab.projections.AmountNameAndValue;
 import br.com.ceslab.ceslab.projections.ProfitMonthPaymentYeahProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,4 +22,12 @@ public interface MonthPaymentRepository extends JpaRepository<MonthPayment, Long
             "AND received != 0;"
     )
     List<ProfitMonthPaymentYeahProjection> findByOneYeahAgo();
+
+    @Query(
+            nativeQuery = true,
+            value = "SELECT CONCAT(LPAD(MONTH(m.due_date), 2, '0'), '/', YEAR(m.due_date)) as name, sum(m.received) as value " +
+                    "FROM tb_month_payment AS m " +
+                    "GROUP BY name; "
+    )
+    List<AmountNameAndValue> findAllByGroup();
 }

@@ -1,10 +1,8 @@
 package br.com.ceslab.ceslab.services;
 
-import br.com.ceslab.ceslab.dto.analytic.ExpenseByYearDTO;
-import br.com.ceslab.ceslab.dto.analytic.ProfitByMonthGeneric;
-import br.com.ceslab.ceslab.dto.analytic.ProfitMonthPaymentForMonthDTO;
-import br.com.ceslab.ceslab.dto.analytic.ProfitRegistrationForMonthDTO;
+import br.com.ceslab.ceslab.dto.analytic.*;
 import br.com.ceslab.ceslab.enums.MonthsPtBr;
+import br.com.ceslab.ceslab.projections.AmountNameAndValue;
 import br.com.ceslab.ceslab.projections.ProfitMonthGenericProjection;
 import br.com.ceslab.ceslab.projections.ProfitMonthPaymentYeahProjection;
 import br.com.ceslab.ceslab.projections.ProfitRegistrationYearProjection;
@@ -31,6 +29,8 @@ public class AnalyticService {
 
     @Autowired
     private ExpenseRepository expenseRepository;
+
+    List<LineChart> linesChart = new ArrayList<>();
 
     @Transactional(readOnly = true)
     public ExpenseByYearDTO getExpenseValueByYear() {
@@ -96,5 +96,42 @@ public class AnalyticService {
             }
         });
         return dto;
+    }
+
+    @Transactional(readOnly = true)
+    public List<LineChart> getLinesChart() {
+        if (!linesChart.isEmpty()) linesChart.clear();
+        getMonthPaymentTotal();
+        getRegistrationsTotal();
+        getExpenseTotal();
+        return linesChart;
+    }
+
+    private void getMonthPaymentTotal() {
+        LineChart lineMonthPayments = new LineChart();
+        lineMonthPayments.setName("Mensalidades");
+        List<AmountNameAndValue> amount = monthPaymentRepository.findAllByGroup();
+        lineMonthPayments.getSeries().addAll(amount);
+        addLineAtLinesChart(lineMonthPayments);
+    }
+
+    private void getRegistrationsTotal() {
+        LineChart lineRegistration = new LineChart();
+        lineRegistration.setName("Matriculas");
+        List<AmountNameAndValue> amount = registrationRepository.findAllByGroup();
+        lineRegistration.getSeries().addAll(amount);
+        addLineAtLinesChart(lineRegistration);
+    }
+
+    private void getExpenseTotal() {
+        LineChart lineRegistration = new LineChart();
+        lineRegistration.setName("Despesas");
+        List<AmountNameAndValue> amount = expenseRepository.findAllByGroup();
+        lineRegistration.getSeries().addAll(amount);
+        addLineAtLinesChart(lineRegistration);
+    }
+
+    private void addLineAtLinesChart(LineChart line) {
+        linesChart.add(line);
     }
 }
