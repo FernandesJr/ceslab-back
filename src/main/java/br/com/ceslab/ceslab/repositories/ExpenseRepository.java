@@ -30,7 +30,8 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
             nativeQuery = true,
             value = "SELECT CONCAT(LPAD(MONTH(e.emission), 2, '0'), '/', YEAR(e.emission)) as name, sum(e.cost) as value " +
                     "FROM tb_expense AS e " +
+                    "WHERE e.emission BETWEEN :dateStart AND :dateEnd " +
                     "GROUP BY name; "
     )
-    List<AmountNameAndValue> findAllByGroup();
+    List<AmountNameAndValue> findAllByGroup(LocalDate dateStart, LocalDate dateEnd);
 }

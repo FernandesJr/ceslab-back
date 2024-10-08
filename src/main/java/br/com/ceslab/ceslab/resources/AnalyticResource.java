@@ -1,15 +1,10 @@
 package br.com.ceslab.ceslab.resources;
 
-import br.com.ceslab.ceslab.dto.analytic.ExpenseByYearDTO;
-import br.com.ceslab.ceslab.dto.analytic.LineChart;
-import br.com.ceslab.ceslab.dto.analytic.ProfitMonthPaymentForMonthDTO;
-import br.com.ceslab.ceslab.dto.analytic.ProfitRegistrationForMonthDTO;
+import br.com.ceslab.ceslab.dto.analytic.*;
 import br.com.ceslab.ceslab.services.AnalyticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,9 +33,9 @@ public class AnalyticResource {
         return ResponseEntity.ok(dto);
     }
 
-    @GetMapping("/chart/line")
-    private ResponseEntity<List<LineChart>> getLinesChart() {
-        List<LineChart> linesDTO = service.getLinesChart();
+    @PostMapping("/chart/line")
+    private ResponseEntity<List<LineChart>> getLinesChart(@RequestBody DatesChartLineDTO dto) {
+        List<LineChart> linesDTO = service.getLinesChart(dto);
         return ResponseEntity.ok(linesDTO);
     }
 }

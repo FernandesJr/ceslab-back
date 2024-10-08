@@ -8,6 +8,7 @@ import br.com.ceslab.ceslab.projections.ProfitMonthPaymentYeahProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface MonthPaymentRepository extends JpaRepository<MonthPayment, Long> {
@@ -27,7 +28,8 @@ public interface MonthPaymentRepository extends JpaRepository<MonthPayment, Long
             nativeQuery = true,
             value = "SELECT CONCAT(LPAD(MONTH(m.due_date), 2, '0'), '/', YEAR(m.due_date)) as name, sum(m.received) as value " +
                     "FROM tb_month_payment AS m " +
+                    "WHERE m.due_date BETWEEN :dateStart AND :dateEnd " +
                     "GROUP BY name; "
     )
-    List<AmountNameAndValue> findAllByGroup();
+    List<AmountNameAndValue> findAllByGroup(LocalDate dateStart, LocalDate dateEnd);
 }

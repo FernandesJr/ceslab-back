@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -99,36 +101,44 @@ public class AnalyticService {
     }
 
     @Transactional(readOnly = true)
-    public List<LineChart> getLinesChart() {
+    public List<LineChart> getLinesChart(DatesChartLineDTO dto) {
         if (!linesChart.isEmpty()) linesChart.clear();
-        getMonthPaymentTotal();
-        getRegistrationsTotal();
-        getExpenseTotal();
+        getMonthPaymentTotal(getDateWithFistDayMonth(dto.dateStart()), getDateWithLastDayMonth(dto.dateEnd()));
+        getRegistrationsTotal(getDateWithFistDayMonth(dto.dateStart()), getDateWithLastDayMonth(dto.dateEnd()));
+        getExpenseTotal(getDateWithFistDayMonth(dto.dateStart()), getDateWithLastDayMonth(dto.dateEnd()));
         return linesChart;
     }
 
-    private void getMonthPaymentTotal() {
+    private void getMonthPaymentTotal(LocalDate dateStart, LocalDate dateEnd) {
         LineChart lineMonthPayments = new LineChart();
         lineMonthPayments.setName("Mensalidades");
-        List<AmountNameAndValue> amount = monthPaymentRepository.findAllByGroup();
+        List<AmountNameAndValue> amount = monthPaymentRepository.findAllByGroup(dateStart, dateEnd);
         lineMonthPayments.getSeries().addAll(amount);
         addLineAtLinesChart(lineMonthPayments);
     }
 
-    private void getRegistrationsTotal() {
+    private void getRegistrationsTotal(LocalDate dateStart, LocalDate dateEnd) {
         LineChart lineRegistration = new LineChart();
         lineRegistration.setName("Matriculas");
-        List<AmountNameAndValue> amount = registrationRepository.findAllByGroup();
+        List<AmountNameAndValue> amount = registrationRepository.findAllByGroup(dateStart, dateEnd);
         lineRegistration.getSeries().addAll(amount);
         addLineAtLinesChart(lineRegistration);
     }
 
-    private void getExpenseTotal() {
+    private void getExpenseTotal(LocalDate dateStart, LocalDate dateEnd) {
         LineChart lineRegistration = new LineChart();
         lineRegistration.setName("Despesas");
-        List<AmountNameAndValue> amount = expenseRepository.findAllByGroup();
+        List<AmountNameAndValue> amount = expenseRepository.findAllByGroup(dateStart, dateEnd);
         lineRegistration.getSeries().addAll(amount);
         addLineAtLinesChart(lineRegistration);
+    }
+
+    private LocalDate getDateWithFistDayMonth(LocalDate dateStart) {
+        return dateStart.withDayOfMonth(1);
+    }
+
+    private LocalDate getDateWithLastDayMonth(LocalDate endDate) {
+        return endDate.with(TemporalAdjusters.lastDayOfMonth());
     }
 
     private void addLineAtLinesChart(LineChart line) {
