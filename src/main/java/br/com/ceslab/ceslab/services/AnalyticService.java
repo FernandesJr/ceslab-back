@@ -14,9 +14,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.time.temporal.TemporalAdjuster;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -113,6 +115,7 @@ public class AnalyticService {
         LineChart lineMonthPayments = new LineChart();
         lineMonthPayments.setName("Mensalidades");
         List<AmountNameAndValue> amount = monthPaymentRepository.findAllByGroup(dateStart, dateEnd);
+        sortListByMonthYear(amount);
         lineMonthPayments.getSeries().addAll(amount);
         addLineAtLinesChart(lineMonthPayments);
     }
@@ -121,6 +124,7 @@ public class AnalyticService {
         LineChart lineRegistration = new LineChart();
         lineRegistration.setName("Matriculas");
         List<AmountNameAndValue> amount = registrationRepository.findAllByGroup(dateStart, dateEnd);
+        sortListByMonthYear(amount);
         lineRegistration.getSeries().addAll(amount);
         addLineAtLinesChart(lineRegistration);
     }
@@ -129,6 +133,7 @@ public class AnalyticService {
         LineChart lineRegistration = new LineChart();
         lineRegistration.setName("Despesas");
         List<AmountNameAndValue> amount = expenseRepository.findAllByGroup(dateStart, dateEnd);
+        sortListByMonthYear(amount);
         lineRegistration.getSeries().addAll(amount);
         addLineAtLinesChart(lineRegistration);
     }
@@ -143,5 +148,16 @@ public class AnalyticService {
 
     private void addLineAtLinesChart(LineChart line) {
         linesChart.add(line);
+    }
+
+    private void sortListByMonthYear(List<AmountNameAndValue> amount) {
+        // Formatter to convert a string for YearMonth
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+
+        Collections.sort(amount, (v1, v2) -> {
+            YearMonth ym1 = YearMonth.parse(v1.getName(), formatter);
+            YearMonth ym2 = YearMonth.parse(v2.getName(), formatter);
+            return ym1.compareTo(ym2);
+        });
     }
 }
